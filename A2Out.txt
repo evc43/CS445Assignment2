@@ -1,0 +1,250 @@
+0 appended to sequence
+2 appended to sequence
+4 appended to sequence
+6 appended to sequence
+8 appended to sequence
+02468
+Before clear(): 5 item(s) in the sequence.
+After clear(): 0 item(s) in the sequence.
+0 prefixed to sequence
+2 prefixed to sequence
+4 prefixed to sequence
+6 prefixed to sequence
+8 prefixed to sequence
+86420
+86420
+0 appended to sequence
+2 appended to sequence
+4 appended to sequence
+6 appended to sequence
+8 appended to sequence
+02468
+0 retrieved from head of sequence
+2 retrieved from head of sequence
+4 retrieved from head of sequence
+6 retrieved from head of sequence
+8 retrieved from head of sequence
+Nothing in the sequence
+0 retrieved from tail of sequence
+2 retrieved from tail of sequence
+4 retrieved from tail of sequence
+6 retrieved from tail of sequence
+8 retrieved from tail of sequence
+Nothing in the sequence
+Prefixing Item 0
+Item 0 removed from Sequence head
+Nothing in the sequence
+Prefixing Item 1
+Item 1 removed from Sequence head
+Nothing in the sequence
+Prefixing Item 2
+Item 2 removed from Sequence head
+Nothing in the sequence
+Prefixing Item 3
+Item 3 removed from Sequence head
+Nothing in the sequence
+Prefixing Item 4
+Item 4 removed from Sequence head
+Nothing in the sequence
+Prefixing Item 5
+Item 5 removed from Sequence head
+Nothing in the sequence
+Prefixing Item 6
+Item 6 removed from Sequence head
+Nothing in the sequence
+Prefixing Item 7
+Item 7 removed from Sequence head
+Nothing in the sequence
+Prefixing Item 8
+Item 8 removed from Sequence head
+Nothing in the sequence
+0 item(s) in the sequence.
+algorithms and data structures are fun
+The first letter is a
+The last letter is n
+Character at index 0 is a
+The letter a appeared 5 times
+Last occurrence of a is at position 31
+A letter preceding an a is  
+Character at index 1 is l
+The letter l appeared 1 times
+Last occurrence of l is at position 1
+A letter preceding an l is a
+Character at index 2 is g
+The letter g appeared 1 times
+Last occurrence of g is at position 2
+A letter preceding an g is l
+Character at index 3 is o
+The letter o appeared 1 times
+Last occurrence of o is at position 3
+A letter preceding an o is g
+Character at index 4 is r
+The letter r appeared 4 times
+Last occurrence of r is at position 32
+A letter preceding an r is o
+Character at index 5 is i
+The letter i appeared 1 times
+Last occurrence of i is at position 5
+A letter preceding an i is r
+Character at index 6 is t
+The letter t appeared 4 times
+Last occurrence of t is at position 25
+A letter preceding an t is i
+Character at index 7 is h
+The letter h appeared 1 times
+Last occurrence of h is at position 7
+A letter preceding an h is t
+Character at index 8 is m
+The letter m appeared 1 times
+Last occurrence of m is at position 8
+A letter preceding an m is h
+Character at index 9 is s
+The letter s appeared 3 times
+Last occurrence of s is at position 29
+A letter preceding an s is m
+Character at index 10 is  
+The letter   appeared 5 times
+Last occurrence of   is at position 34
+A letter preceding an   is s
+Character at index 11 is a
+The letter a appeared 5 times
+Last occurrence of a is at position 31
+A letter preceding an a is  
+Character at index 12 is n
+The letter n appeared 2 times
+Last occurrence of n is at position 37
+A letter preceding an n is a
+Character at index 13 is d
+The letter d appeared 2 times
+Last occurrence of d is at position 15
+A letter preceding an d is n
+Character at index 14 is  
+The letter   appeared 5 times
+Last occurrence of   is at position 34
+A letter preceding an   is s
+Character at index 15 is d
+The letter d appeared 2 times
+Last occurrence of d is at position 15
+A letter preceding an d is n
+Character at index 16 is a
+The letter a appeared 5 times
+Last occurrence of a is at position 31
+A letter preceding an a is  
+Character at index 17 is t
+The letter t appeared 4 times
+Last occurrence of t is at position 25
+A letter preceding an t is i
+Character at index 18 is a
+The letter a appeared 5 times
+Last occurrence of a is at position 31
+A letter preceding an a is  
+Character at index 19 is  
+The letter   appeared 5 times
+Last occurrence of   is at position 34
+A letter preceding an   is s
+Character at index 20 is s
+The letter s appeared 3 times
+Last occurrence of s is at position 29
+A letter preceding an s is m
+Character at index 21 is t
+The letter t appeared 4 times
+Last occurrence of t is at position 25
+A letter preceding an t is i
+Character at index 22 is r
+The letter r appeared 4 times
+Last occurrence of r is at position 32
+A letter preceding an r is o
+Character at index 23 is u
+The letter u appeared 3 times
+Last occurrence of u is at position 36
+A letter preceding an u is r
+Character at index 24 is c
+The letter c appeared 1 times
+Last occurrence of c is at position 24
+A letter preceding an c is u
+Character at index 25 is t
+The letter t appeared 4 times
+Last occurrence of t is at position 25
+A letter preceding an t is i
+Character at index 26 is u
+The letter u appeared 3 times
+Last occurrence of u is at position 36
+A letter preceding an u is r
+Character at index 27 is r
+The letter r appeared 4 times
+Last occurrence of r is at position 32
+A letter preceding an r is o
+Character at index 28 is e
+The letter e appeared 2 times
+Last occurrence of e is at position 33
+A letter preceding an e is r
+Character at index 29 is s
+The letter s appeared 3 times
+Last occurrence of s is at position 29
+A letter preceding an s is m
+Character at index 30 is  
+The letter   appeared 5 times
+Last occurrence of   is at position 34
+A letter preceding an   is s
+Character at index 31 is a
+The letter a appeared 5 times
+Last occurrence of a is at position 31
+A letter preceding an a is  
+Character at index 32 is r
+The letter r appeared 4 times
+Last occurrence of r is at position 32
+A letter preceding an r is o
+Character at index 33 is e
+The letter e appeared 2 times
+Last occurrence of e is at position 33
+A letter preceding an e is r
+Character at index 34 is  
+The letter   appeared 5 times
+Last occurrence of   is at position 34
+A letter preceding an   is s
+Character at index 35 is f
+The letter f appeared 1 times
+Last occurrence of f is at position 35
+A letter preceding an f is  
+Character at index 36 is u
+The letter u appeared 3 times
+Last occurrence of u is at position 36
+A letter preceding an u is r
+Character at index 37 is n
+The letter n appeared 2 times
+Last occurrence of n is at position 37
+A letter preceding an n is a
+IndexOutOfBoundsException
+The letter z appeared 0 times
+A letter preceding a p is null
+algorithms and data structures
+algorithms and data structures one is fun
+algorithms and data structures is fun
+algorithms and data structures two is fun
+algorithms and data structures two is also fun
+Trimming by 100 letters should return false
+algorithms and data structures two is also fun
+algorithms and data structures one < algorithms and data structures two
+algorithms and data structures one == algorithms and data structures one
+algorithms and data structures one > algorithms and data structures
+algorithms and data structures < algorithms and data structures two
+Prefixing 0
+Prefixing 1
+Prefixing 2
+Prefixing 3
+Prefixing 4
+Prefixing 5
+Prefixing 6
+Prefixing 7
+76543210
+Reversing
+01234567
+Removing 3 items from tail then appending 8
+012348
+Reversing
+843210
+Rotating right
+084321
+Rotating left twice
+432108
+The size of the sequence is 1000000
