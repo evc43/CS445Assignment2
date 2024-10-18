@@ -339,13 +339,14 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
 
     @Override
     public void shuffle(int[] oldPositions, int[] newPositions) {
-        Node[] oldNums = new Node[this.numberOfEntries];
+        /*Node[] oldNums = new Node[this.numberOfEntries];
         Node curr = this.firstNode;
         for (int i = 0; i < this.numberOfEntries; i++) {
             oldNums[i] = curr.item;
             curr = curr.next;
         }
         return;
+        */
     }
 
     @Override
