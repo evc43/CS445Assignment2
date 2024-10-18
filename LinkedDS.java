@@ -285,7 +285,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
         Node curr = this.firstNode;
         for (int i = 0; i < this.numberOfEntries; i++) {
             if (curr.item.compareTo(item) <= 0) {
-                newLL.append(item);
+                newLL.append(curr.item);
             } 
             curr = curr.next;
         }
