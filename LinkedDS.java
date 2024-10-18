@@ -29,6 +29,20 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
     }
 
     @Override
+    public String toString() {
+        String result = "[";
+        Node curr = firstNode;
+        for (int i = 0; i < numberOfEntries; i++) {
+            result += curr.item + " ";
+            curr = curr.next;
+        }
+        result = result.trim();
+        result += "]";
+
+        return result;
+    }
+
+    @Override
     public void append(T item) {
         this.numberOfEntries++;
         if (this.firstNode == null) {
