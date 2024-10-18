@@ -65,8 +65,8 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
         Node lastNode = this.firstNode.prev;
         Node newNode = new Node(item);
         newNode.next = firstNode;
-        this.firstNode.prev = newNode;
         newNode.prev = lastNode;
+        this.firstNode.prev = newNode;
         this.firstNode = newNode;
         this.numberOfEntries++;
     }
@@ -266,6 +266,9 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
             }
             return true;
         }
+        if (start + numItems == this.numberOfEntries) {
+            return trim(numItems);
+        }
         Node startNode = this.nodeAt(start - 1);
         Node endNode = this.nodeAt(start + numItems);
         startNode.next = endNode;
@@ -335,15 +338,13 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
 
     @Override
     public void shuffle(int[] oldPositions, int[] newPositions) {
-        /*
-        T[] oldNums = new T[this.numberOfEntries];
+        Node[] oldNums = new Node[this.numberOfEntries];
         Node curr = this.firstNode;
         for (int i = 0; i < this.numberOfEntries; i++) {
             oldNums[i] = curr.item;
             curr = curr.next;
         }
         return;
-        */
     }
 
     @Override
