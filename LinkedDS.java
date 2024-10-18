@@ -86,10 +86,10 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
             return;
         }
         Node curr = this.firstNode;
-        for (int i = 0; i < position-2; i++) {
+        for (int i = 0; i < position-1; i++) {
             curr = curr.next;
         }
-        Node tmp = curr;
+        Node tmp = curr.next;
         curr.next = new Node(item);
         curr.next.next = tmp;
         if (position == numberOfEntries-1) {
@@ -258,7 +258,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
             curr = curr.next;
         }
         Node tmp = curr;
-        for (int i = 0; i < numItems; i++) {
+        for (int i = 0; i <= numItems; i++) {
             tmp = tmp.next;
         }
         curr.next = tmp;
