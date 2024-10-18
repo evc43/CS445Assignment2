@@ -62,13 +62,12 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
             append(item);
             return;
         }
-        Node lastNode = this.firstNode.prev;
-        Node newNode = new Node(item);
-        newNode.next = firstNode;
+                Node newNode = new Node(item);
+        newNode.next = this.firstNode;
+        newNode.prev = this.firstNode.prev;
+        this.firstNode.prev.next = newNode;
         this.firstNode.prev = newNode;
-        newNode.prev = lastNode;
         this.firstNode = newNode;
-        this.numberOfEntries++;
     }
 
     /* Insert at given position of linked list */
