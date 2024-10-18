@@ -1,11 +1,11 @@
 public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterface<T>, ReorderInterface, Comparable<LinkedDS<T>> {
     Node firstNode = null;
-    Node lastNode = null;
     int numberOfEntries = 0;
 
     public class Node {
         T item = null;
         Node next = null;
+        Node prev = null;
         public Node(T item) {
             this.item = item;
         }
@@ -16,56 +16,55 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
     }
 
     public LinkedDS(LinkedDS<T> ll) {
-        Node curr = new Node(ll.first());
-        this.firstNode = curr;
+        LinkedDS<T> newDS = new LinkedDS<>();
         Node pointer = ll.firstNode;
-        for (int i = 0; i < ll.size()-1; i++) {
-            curr.next = pointer.next;
-            curr = curr.next;
+        for (int i = 0; i < ll.size(); i++) {
+            newDS.append(pointer.item);
             pointer = pointer.next;
         }
-        this.numberOfEntries = ll.numberOfEntries;
-        this.lastNode = curr;
     }
 
     @Override
     public String toString() {
         String result = "";
         Node curr = firstNode;
-        while (curr != null) {
+        for (int i = 0; i < this.numberOfEntries; i++) {
             result += curr.item;
             curr = curr.next;
         }
         result = result.trim();
-        result += "";
 
         return result;
     }
 
     @Override
     public void append(T item) {
-        this.numberOfEntries++;
-        if (this.firstNode == null) {
+        if (this.isEmpty()) {
             this.firstNode = new Node(item);
-            return;
+            this.firstNode.next = this.firstNode;
+            this.firstNode.prev = this.firstNode;
+        } else { // not empty
+            Node lastNode = firstNode.prev;
+            lastNode.next = new Node(item);
+            lastNode.next.prev = lastNode;
+            lastNode.next.next = this.firstNode;
+            this.firstNode.prev = lastNode.next;
         }
-        if (this.firstNode.next == null) {
-            this.firstNode.next = new Node(item);
-            return;
-        }
-        Node curr = this.firstNode;
-        for (int i = 0; i < this.size()-2; i++) {
-            curr = curr.next;
-        }
-        curr.next = new Node(item);
-        this.lastNode = curr.next;
+        this.numberOfEntries++;
     }
 
     @Override
     public void prefix(T item) {
-        Node tmp = this.firstNode;
-        this.firstNode = new Node(item);
-        this.firstNode.next = tmp;
+        if (isEmpty()) {
+            append(item);
+            return;
+        }
+        Node lastNode = this.firstNode.prev;
+        Node newNode = new Node(item);
+        newNode.next = firstNode;
+        this.firstNode.prev = newNode;
+        newNode.prev = lastNode;
+        this.firstNode = newNode;
         this.numberOfEntries++;
     }
 
@@ -74,30 +73,38 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
         if (position < 0 || position > this.numberOfEntries) {
             throw new IndexOutOfBoundsException();
         }
-        this.numberOfEntries++;
-        if (this.numberOfEntries == 0 && position == 0) {
-            Node tmp = new Node(item);
-            this.firstNode = tmp;
-            this.lastNode = tmp;
+        if (position == numberOfEntries) { // inserting at end
+            this.append(item);
             return;
+        } else {
+            if (position == 0) { // adding at front
+                prefix(item);
+                return;
+            } else { // adding in middle
+                Node nodeBefore = nodeAt(position - 1);
+                Node nodeAfter = nodeBefore.next;
+                Node newNode = new Node(item);
+                newNode.next = nodeAfter;
+                nodeBefore.next = newNode;
+                nodeAfter.prev = newNode;
+                newNode.prev = nodeBefore;
+                this.numberOfEntries++;
+            }
         }
-        if (position == 0) {
-            Node n = new Node(item);
-            Node tmp = firstNode;
-            n.next = tmp;
-            this.firstNode = n;
-            return;
-        }
-        Node curr = this.firstNode;
-        for (int i = 0; i < position-1; i++) {
-            curr = curr.next;
-        }
-        Node tmp = curr.next;
-        curr.next = new Node(item);
-        curr.next.next = tmp;
-        if (position == numberOfEntries-1) {
-            lastNode = curr.next;
-        }
+    }
+
+    private Node nodeAt(int position) {
+        if (position < 0 || position > (this.size() - 1))
+		{
+			throw new IndexOutOfBoundsException();
+		}
+		Node current = firstNode;
+		for (int i=0; i<position; i++)
+		{
+			current = current.next;
+		}
+
+		return current;
     }
 
     @Override
@@ -122,7 +129,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
 
     @Override
     public boolean isEmpty() {
-        return this.firstNode == null;
+        return this.numberOfEntries == 0;
     }
 
     @Override
@@ -143,11 +150,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
         if (this.firstNode == null) {
             return null;
         }
-        Node current = this.firstNode;
-        while (current.next != null) {
-            current = current.next;
-        }
-        return current.item;
+        return this.firstNode.prev.item;
     }
 
     @Override
@@ -155,24 +158,21 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
         if (this.firstNode == null) {
             return null;
         }
-        if (this.size() == 1) {
-            return null;
-        }
         Node current = this.firstNode;
-        while (current.next != null && current.next.item != item) { 
+        for (int i = 1; i < this.numberOfEntries; i++) { // skip first entry
             current = current.next;
+            if (current.item == item) {
+                return current.prev.item;
+            }
         }
-        if (current.next == null) {
-            return null;
-        }
-        return current.item;
+        return null;
     }
 
     @Override
     public int getFrequencyOf(T item) {
         Node current = this.firstNode;
         int counter = 0;
-        while (current != null) {
+        for (int i = 0; i < this.numberOfEntries; i++) {
             if (current.item == item) {
                 counter++;
             }
@@ -184,20 +184,17 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
     @Override
     public void clear() {
         this.firstNode = null;
-        this.lastNode = null;
         this.numberOfEntries = 0;
     }
 
     @Override
     public int lastOccurrenceOf(T item) {
         Node current = this.firstNode;
-        int counter = 0;
         int idx = -1;
-        while (current != null) {
+        for (int i = 0; i < this.numberOfEntries; i++) {
             if (current.item == item) {
-                idx = counter;
+                idx = i;
             }
-            counter++;
             current = current.next;
         }
         return idx;
@@ -205,38 +202,36 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
 
     @Override
     public T deleteHead() {
-        if (this.size() == 0) {
+        if (this.isEmpty()) {
             throw new EmptySequenceException("Empty");
         }
+        T value = firstNode.item;
+
+        Node lastNode = firstNode.prev;
+        firstNode = firstNode.next;
+        lastNode.next = firstNode;
+        firstNode.prev = lastNode;
+
         this.numberOfEntries--;
-        T tmp = this.firstNode.item;
-        this.firstNode = this.firstNode.next;
-        if (this.firstNode == null) {
-            this.lastNode = null;
-        }
-        return tmp;
+        return value;
     }
 
     @Override
     public T deleteTail() {
-        if (this.firstNode == null) {
+        if (this.isEmpty()) {
             throw new EmptySequenceException("Empty List");
         }
+        if (this.numberOfEntries == 1) {
+            return deleteHead();
+        }
+        Node lastNode = firstNode.prev;
+        T result = lastNode.item;
+        Node before = lastNode.prev;
+        before.next = firstNode;
+        firstNode.prev = before;
+
         this.numberOfEntries--;
-        if (this.firstNode.next == null) {
-            T rem = this.firstNode.item;
-            this.firstNode = null;
-            this.lastNode = null;
-            return rem;
-        }
-        Node curr = firstNode;
-        while (curr.next.next != null) {
-            curr = curr.next;
-        }
-        T tmp = curr.next.item;
-        curr.next = null;
-        this.lastNode = curr;
-        return tmp;
+        return result;
     }
 
     @Override
@@ -255,50 +250,67 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
         if (this.numberOfEntries < start + numItems) {
             return false;
         }
+        Node startNode = this.nodeAt(start - 1);
+        Node endNode = this.nodeAt(start + numItems);
+        startNode.next = endNode;
+        endNode.prev = startNode;
         this.numberOfEntries -= numItems;
-        if (start == 0) {
-            Node curr = this.firstNode;
-            for (int i = 0; i < numItems; i++) {
-                curr = curr.next;
-            }
-            this.firstNode = curr;
-            return true;
-        }
-        Node curr = this.firstNode;
-        for (int i = 0; i < start-2; i++) {
-            curr = curr.next;
-        }
-        Node tmp = curr;
-        for (int i = 0; i <= numItems; i++) {
-            tmp = tmp.next;
-        }
-        curr.next = tmp;
         return true;
     }
 
     @Override
-    public SequenceInterface<T> slice(T item) {
-       return null;
+    public LinkedDS<T> slice(T item) {
+        LinkedDS<T> newLL = new LinkedDS<>();
+
+        Node curr = this.firstNode;
+        for (int i = 0; i < this.numberOfEntries; i++) {
+            if (curr.item.compareTo(item) <= 0) {
+                newLL.append(item);
+            } 
+            curr = curr.next;
+        }
+        return newLL;
     }
 
     @Override
     public SequenceInterface<T> slice(int start, int numItems) {
-        return null;
+        LinkedDS<T> newLL = new LinkedDS<>();
+
+        Node curr = this.nodeAt(start);
+        for (int i = 0; i < numItems; i++) {
+            if (curr.item.compareTo(curr.item) <= 0) {
+                newLL.append(curr.item);
+            } 
+            curr = curr.next;
+        }
+        return newLL;
     }
 
     @Override
     public void reverse() {
-        return;
+        Node curr = this.firstNode;
+
+        for (int i = 0; i < this.numberOfEntries; i++) {
+            Node next = curr.next;
+            curr.next = curr.prev;
+            curr.prev = next;
+            curr = next;
+        }
+        this.firstNode = this.firstNode.prev;
     }
 
     @Override
     public void rotateRight() {
-        return;
+        if (!this.isEmpty()) {
+            this.firstNode = this.firstNode.next;
+        }
     }
 
     @Override
     public void rotateLeft() {
-        return;
+        if (!this.isEmpty()) {
+            this.firstNode = this.firstNode.prev;
+        }
     }
 
     @Override
@@ -308,7 +320,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
 
     @Override
     public int compareTo(LinkedDS<T> o) {
-        return 0;
+        
     }
     
 }
