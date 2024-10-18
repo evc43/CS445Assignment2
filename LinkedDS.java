@@ -205,11 +205,11 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
             throw new EmptySequenceException("Empty");
         }
 
+        T value = firstNode.item;
         if (this.numberOfEntries == 1) {
             this.firstNode = null;
+            return value;
         }
-
-        T value = firstNode.item;
 
         Node lastNode = firstNode.prev;
         firstNode = firstNode.next;
@@ -253,6 +253,9 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
     public boolean cut(int start, int numItems) {
         if (this.numberOfEntries < start + numItems) {
             return false;
+        }
+        if (start == 0) {
+            return trim(numItems);
         }
         Node startNode = this.nodeAt(start - 1);
         Node endNode = this.nodeAt(start + numItems);
