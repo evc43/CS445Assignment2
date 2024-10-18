@@ -15,6 +15,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
 
     }
 
+    /* Linked list constructor */
     public LinkedDS(LinkedDS<T> ll) {
         Node pointer = ll.firstNode;
         for (int i = 0; i < ll.size(); i++) {
@@ -23,6 +24,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
         }
     }
 
+    /* Provides the string representation of the linkedlist */
     @Override
     public String toString() {
         String result = "";
@@ -36,6 +38,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
         return result;
     }
 
+    /* Append a new item to the linked list */
     @Override
     public void append(T item) {
         if (this.isEmpty()) {
@@ -52,6 +55,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
         this.numberOfEntries++;
     }
 
+    /* Prefix item at start of linked list */
     @Override
     public void prefix(T item) {
         if (isEmpty()) {
@@ -67,6 +71,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
         this.numberOfEntries++;
     }
 
+    /* Insert at given position of linked list */
     @Override
     public void insert(T item, int position) {
         if (position < 0 || position > this.numberOfEntries) {
@@ -256,7 +261,9 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
             return false;
         }
         if (start == 0) {
-            return trim(numItems);
+            for (int i = 0; i < numItems; i++) {
+                deleteHead();
+            }
         }
         Node startNode = this.nodeAt(start - 1);
         Node endNode = this.nodeAt(start + numItems);
@@ -310,14 +317,14 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
     @Override
     public void rotateRight() {
         if (!this.isEmpty()) {
-            this.firstNode = this.firstNode.next;
+            this.firstNode = this.firstNode.prev;
         }
     }
 
     @Override
     public void rotateLeft() {
         if (!this.isEmpty()) {
-            this.firstNode = this.firstNode.prev;
+            this.firstNode = this.firstNode.next;
         }
     }
 
