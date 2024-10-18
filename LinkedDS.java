@@ -72,6 +72,11 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
     @Override
     public void insert(T item, int position) {
         this.numberOfEntries++;
+        if (this.numberOfEntries == 0 && position == 0) {
+            Node tmp = new Node(item);
+            this.firstNode = tmp;
+            this.lastNode = tmp;
+        }
         Node curr = this.firstNode;
         for (int i = 0; i < position-2; i++) {
             curr = curr.next;
