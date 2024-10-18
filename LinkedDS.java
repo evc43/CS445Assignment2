@@ -304,18 +304,19 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
 
     @Override
     public void reverse() {
-        Node curr = this.firstNode;
-        if (this.isEmpty()) {
+        if (this.numberOfEntries <= 1) {
             return;
         }
-
+        Node curr = this.firstNode;
+        Node tmp = null;
         for (int i = 0; i < this.numberOfEntries; i++) {
-            Node next = curr.next;
-            curr.next = curr.prev;
-            curr.prev = next;
-            curr = next;
+            tmp = curr.prev;
+            curr.prev = curr.next;
+            curr.next = tmp;
+            curr = curr.prev;
         }
-        this.firstNode = this.firstNode.prev;
+        this.firstNode = tmp.prev;
+        return;
     }
 
     @Override
