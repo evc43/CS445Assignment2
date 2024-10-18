@@ -320,7 +320,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
 
     @Override
     public int compareTo(LinkedDS<T> o) {
-        
+        return 0;
     }
     
 }
