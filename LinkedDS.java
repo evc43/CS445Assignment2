@@ -192,7 +192,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
     public int lastOccurrenceOf(T item) {
         Node current = this.firstNode;
         int counter = 0;
-        int idx = 0;
+        int idx = -1;
         while (current != null) {
             if (current.item == item) {
                 idx = counter;
