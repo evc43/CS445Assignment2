@@ -71,7 +71,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
 
     @Override
     public void insert(T item, int position) {
-        if (position < 0 || position >= this.numberOfEntries) {
+        if (position < 0 || position > this.numberOfEntries) {
             throw new IndexOutOfBoundsException();
         }
         this.numberOfEntries++;
