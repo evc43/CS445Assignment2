@@ -264,6 +264,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
             for (int i = 0; i < numItems; i++) {
                 deleteHead();
             }
+            return true;
         }
         Node startNode = this.nodeAt(start - 1);
         Node endNode = this.nodeAt(start + numItems);
@@ -304,6 +305,9 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
     @Override
     public void reverse() {
         Node curr = this.firstNode;
+        if (this.isEmpty()) {
+            return;
+        }
 
         for (int i = 0; i < this.numberOfEntries; i++) {
             Node next = curr.next;
