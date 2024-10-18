@@ -32,7 +32,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
     public String toString() {
         String result = "";
         Node curr = firstNode;
-        for (int i = 0; i < numberOfEntries; i++) {
+        while (curr != null) {
             result += curr.item;
             curr = curr.next;
         }
@@ -130,7 +130,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
     @Override
     public T first() {
         if (this.firstNode == null) {
-            throw new EmptySequenceException("Empty List");
+            return null;
         }
         return this.firstNode.item;
     }
@@ -138,7 +138,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
     @Override
     public T last() {
         if (this.firstNode == null) {
-            throw new EmptySequenceException("Empty List");
+            return null;
         }
         Node current = this.firstNode;
         while (current.next != null) {
@@ -150,7 +150,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
     @Override
     public T predecessor(T item) {
         if (this.firstNode == null) {
-            throw new EmptySequenceException("Empty List");
+            return null;
         }
         if (this.size() == 1) {
             return null;
@@ -227,7 +227,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
             return rem;
         }
         Node curr = firstNode;
-        for (int i = 0; i < this.size()-2; i++) {
+        while (curr.next.next != null) {
             curr = curr.next;
         }
         T tmp = curr.next.item;
@@ -249,8 +249,20 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
 
     @Override
     public boolean cut(int start, int numItems) {
+        if (this.numberOfEntries < start + numItems) {
+            return false;
+        }
         this.numberOfEntries -= numItems;
-        return false;
+        Node curr = this.firstNode;
+        for (int i = 0; i < start-2; i++) {
+            curr = curr.next;
+        }
+        Node tmp = curr;
+        for (int i = 0; i < numItems; i++) {
+            tmp = tmp.next;
+        }
+        curr.next = tmp;
+        return true;
     }
 
     @Override
