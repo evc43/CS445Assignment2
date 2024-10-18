@@ -16,10 +16,9 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
     }
 
     public LinkedDS(LinkedDS<T> ll) {
-        LinkedDS<T> newDS = new LinkedDS<>();
         Node pointer = ll.firstNode;
         for (int i = 0; i < ll.size(); i++) {
-            newDS.append(pointer.item);
+            this.append(pointer.item);
             pointer = pointer.next;
         }
     }
@@ -205,6 +204,11 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
         if (this.isEmpty()) {
             throw new EmptySequenceException("Empty");
         }
+
+        if (this.numberOfEntries == 1) {
+            this.firstNode = null;
+        }
+
         T value = firstNode.item;
 
         Node lastNode = firstNode.prev;
@@ -320,6 +324,19 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
 
     @Override
     public int compareTo(LinkedDS<T> o) {
+        Node firstPtr = this.firstNode;
+        Node secondPtr = o.firstNode;
+        for (int i = 0; i < this.numberOfEntries; i++) {
+            if (i >= o.numberOfEntries) {
+                return 1;
+            } else {
+                if (firstPtr.item.compareTo(secondPtr.item) != 0) {
+                    return firstPtr.item.compareTo(secondPtr.item);
+                } 
+                firstPtr = firstPtr.next;
+                secondPtr = secondPtr.next;
+            }
+        }
         return 0;
     }
     
