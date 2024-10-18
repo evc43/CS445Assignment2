@@ -76,6 +76,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
             Node tmp = new Node(item);
             this.firstNode = tmp;
             this.lastNode = tmp;
+            return;
         }
         Node curr = this.firstNode;
         for (int i = 0; i < position-2; i++) {
