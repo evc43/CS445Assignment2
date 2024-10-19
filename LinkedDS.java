@@ -278,6 +278,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
         return true;
     }
 
+    /* Returns another linked list containing items less than or equal to the given item */
     @Override
     public LinkedDS<T> slice(T item) {
         LinkedDS<T> newLL = new LinkedDS<>();
@@ -292,8 +293,12 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
         return newLL;
     }
 
+    /* Returns another linked list containing numItems from the start */
     @Override
     public SequenceInterface<T> slice(int start, int numItems) {
+        if (start + numItems > this.numberOfEntries) {
+            return null;
+        }
         LinkedDS<T> newLL = new LinkedDS<>();
 
         Node curr = this.nodeAt(start);
@@ -306,6 +311,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
         return newLL;
     }
 
+    /* Reverses the linked list */
     @Override
     public void reverse() {
         if (this.numberOfEntries <= 1) {
@@ -323,6 +329,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
         return;
     }
 
+    /* Moves the head to the end of the linked list */
     @Override
     public void rotateRight() {
         if (!this.isEmpty()) {
@@ -330,6 +337,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
         }
     }
 
+    /* Moves the tail to the front of the linked list */
     @Override
     public void rotateLeft() {
         if (!this.isEmpty()) {
@@ -337,6 +345,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
         }
     }
 
+    /* shuffle the linked list */
     @Override
     public void shuffle(int[] oldPositions, int[] newPositions) {
         /*Node[] oldNums = new Node[this.numberOfEntries];
@@ -349,6 +358,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
         */
     }
 
+    /* lexographically compare two linked lists */
     @Override
     public int compareTo(LinkedDS<T> o) {
         Node firstPtr = this.firstNode;
