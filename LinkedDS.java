@@ -364,9 +364,15 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
             curr = curr.next;
         }
 
+        @SuppressWarnings("unchecked")
+        T[] arr = (T[]) new Object[this.numberOfEntries];
+        for (int i = 0; i < oldPositions.length; i++) {
+            arr[newPositions[i]] = oldNums[oldPositions[i]];
+        }
+        
         this.clear();
-        for (int i = 0; i < newPositions.length; i++) {
-            this.append(oldNums[newPositions[i]]);
+        for (int i = 0; i < arr.length; i++) {
+            this.append(arr[i]);
         }
         return;
     }
