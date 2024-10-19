@@ -112,6 +112,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
 		return current;
     }
 
+    /* get item at given position in linked list */
     @Override
     public T itemAt(int position) {
         if (position < 0 || position > (this.size() - 1))
@@ -125,23 +126,21 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
 		}
 
 		return current.item;
-
-	/**
-	 * Runtime: O(1)
-	 * @return true if the SequenceInterface<T> is empty, and false otherwise
-	 */
     }
 
+    /* check linked list empty */
     @Override
     public boolean isEmpty() {
-        return this.numberOfEntries == 0;
+        return this.numberOfEntries == 0; // 0 entries
     }
 
+    /* check number of entries */
     @Override
     public int size() {
         return this.numberOfEntries;
     }
 
+    /* get first entry */
     @Override
     public T first() {
         if (this.firstNode == null) {
@@ -150,6 +149,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
         return this.firstNode.item;
     }
 
+    /* get last entry */
     @Override
     public T last() {
         if (this.firstNode == null) {
@@ -158,6 +158,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
         return this.firstNode.prev.item;
     }
 
+    /* get item before given entry */
     @Override
     public T predecessor(T item) {
         if (this.firstNode == null) {
@@ -173,6 +174,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
         return null;
     }
 
+    /* check how many of inputted item are in the linked list */
     @Override
     public int getFrequencyOf(T item) {
         Node current = this.firstNode;
@@ -186,12 +188,14 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
         return counter;
     }
 
+    /* empty the linked list */
     @Override
     public void clear() {
         this.firstNode = null;
         this.numberOfEntries = 0;
     }
 
+    /* get last occurence of item in the linked list */
     @Override
     public int lastOccurrenceOf(T item) {
         Node current = this.firstNode;
@@ -205,6 +209,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
         return idx;
     }
 
+    /* delete the first node from the linked list */
     @Override
     public T deleteHead() {
         if (this.isEmpty()) {
@@ -227,6 +232,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
         return value;
     }
 
+    /* remove last node */
     @Override
     public T deleteTail() {
         if (this.isEmpty()) {
@@ -245,6 +251,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
         return result;
     }
 
+    /* remove numitems from end of linked list */
     @Override
     public boolean trim(int numItems) {
         if (this.size() < numItems) {
@@ -256,6 +263,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
         return true;
     }
 
+    /* cut numitems from inputted index of linkedlist */
     @Override
     public boolean cut(int start, int numItems) {
         if (this.numberOfEntries < start + numItems) {
@@ -348,14 +356,19 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
     /* shuffle the linked list */
     @Override
     public void shuffle(int[] oldPositions, int[] newPositions) {
-        /*Node[] oldNums = new Node[this.numberOfEntries];
+        @SuppressWarnings("unchecked")
+        T[] oldNums = (T[]) new Object[this.numberOfEntries];
         Node curr = this.firstNode;
         for (int i = 0; i < this.numberOfEntries; i++) {
             oldNums[i] = curr.item;
             curr = curr.next;
         }
+
+        this.clear();
+        for (int i = 0; i < newPositions.length; i++) {
+            this.append(oldNums[newPositions[i]]);
+        }
         return;
-        */
     }
 
     /* lexographically compare two linked lists */
