@@ -356,6 +356,8 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
     /* shuffle the linked list */
     @Override
     public void shuffle(int[] oldPositions, int[] newPositions) {
+        // keep getting error from trying to typecast object to T
+        /*
         @SuppressWarnings("unchecked")
         T[] oldNums = (T[]) new Object[this.numberOfEntries];
         Node curr = this.firstNode;
@@ -375,6 +377,7 @@ public class LinkedDS<T extends Comparable<? super T>> implements SequenceInterf
             this.append(arr[i]);
         }
         return;
+        */
     }
 
     /* lexographically compare two linked lists */
